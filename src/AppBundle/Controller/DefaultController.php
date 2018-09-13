@@ -69,17 +69,26 @@ class DefaultController extends Controller
         }
         return $helpers->json($data);
     }
-    public function pruebasAction(){
-        $em = $this->GetDoctrine()->getManager();
-        $userRepo = $em->getRepository('BackendBundle:User');
-        $users = $userRepo->findAll();
-        //var_dump($users);
+    public function pruebasAction(Request $request){
         $helper = $this->get(Helpers::Class);
-        return $helper->json($users);   
-        /*return $this->json(array(
-        'status' => 'success',
-            'users' => $users[0]->getName()
+        $jwt_auth = $this->get(JwtAuth::Class);
+        $token = $request->get("authorization",null);
+        if($token && $jwt_auth->checkToken($token)){
+            $em = $this->GetDoctrine()->getManager();
+            $userRepo = $em->getRepository('BackendBundle:User');
+            $users = $userRepo->findAll();
+            
+           
+            return $helper->json(array(
+            'status' => 'success',
+            'users' => $users
         ));
-        die();*/
+        } else{
+            return $this->json(array(
+            'status' => 'error',
+            'users' => 'Login Failed'
+        ));
+        } 
+        
     }
 }
