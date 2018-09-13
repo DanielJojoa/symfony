@@ -23,7 +23,7 @@ class JwtAuth
         }
         if ($signup == true)
         {   
-            /*$token = array(
+            $token = array(
                 "sub" => $user->getId(),
                 "email" => $user->getEmail(),
                 "name" => $user->getName(),
@@ -34,14 +34,14 @@ class JwtAuth
             );
             $jwt = JWT::encode($token,$this->key,'HS256');
             $deconded = JWT::decode($jwt,$this->key,array('HS256'));
-            if($getHash == null || $getHash == false){
-                $data =$jwt;
+            if($getHash ==null){
+                $data = $jwt;
             }
             else{
                 $data = $deconded;
             }
-            $data = $jwt;*/
-            return $password." ".$email;
+            
+            return $data;
         }else{
             $data = array (
                 "status"=> "error",

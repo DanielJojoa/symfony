@@ -35,21 +35,25 @@ class DefaultController extends Controller
             $params = json_decode($json);
             $email =(isset($params->email)) ? $params->email:null;
             $password =(isset($params->password)) ? $params->password:null;
+            $getHash =(isset($params->getHash)) ? $params->getHash:null;
             
             $emailConstranint = new Assert\Email();
             $emailConstranint->message = "This email is not valid";
             $validate_email = $this->get("validator")->validate($email,$emailConstranint);
-            var_dump($password);
+            
             if( $email != null && count($validate_email) == 0 && $password != null)
             { 
+
                 $jwt_auth = $this->get(JwtAuth::Class);
-                $signup = $jwt_auth->signup($email,$password); 
-                $data = array(
-                      'status' =>'success',
-                       'data' =>'ok',
-                       'signup' => $signup
                 
-                            );
+                if($getHash == null){
+                    $signup = $jwt_auth->signup($email,$password); 
+                }
+                else{
+                    $signup = $jwt_auth->signup($email,$password,true); 
+                }
+                return $this->json($signup);
+                
             }
             else
             {
