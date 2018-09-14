@@ -39,7 +39,7 @@ services:
         arguments:
             $manager: '@doctrine.orm.entity_manager' 
 
-    AppBundle\Services\JWTAuth:
+    AppBundle\Services\JwtAuth:
         public: true
         arguments:
             $manager: '@doctrine.orm.entity_manager' 

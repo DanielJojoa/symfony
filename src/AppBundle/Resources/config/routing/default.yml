@@ -17,4 +17,20 @@ default_new:
 default_edit:
     path: /edit
     defaults: { _controller: "AppBundle:User:edit" }
+    methods: POST
+default_newtask:
+    path: /newtask
+    defaults: { _controller: "AppBundle:Task:new" }
+    methods: POST
+default_eduttask:
+    path: /edittask/{id}
+    defaults: { _controller: "AppBundle:Task:new", id: null }
+    methods: POST 
+default_detail:
+    path: /detail/{id}
+    defaults: { _controller: "AppBundle:Task:task", id: null }
+    methods: POST 
+default_tasks:
+    path: /list
+    defaults: { _controller: "AppBundle:Task:tasks"}
     methods: POST 

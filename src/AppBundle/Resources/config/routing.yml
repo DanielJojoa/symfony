@@ -1,3 +1,6 @@
+app_task:
+    resource: "@AppBundle/Resources/config/routing/task.yml"
+    prefix: /task
 app_default:
     resource: "@AppBundle/Resources/config/routing/default.yml"
     prefix: /
@@ -5,3 +8,4 @@ app_default:
 app_user:
     resource: "@AppBundle/Resources/config/routing/user.yml"
     prefix: /user
+
