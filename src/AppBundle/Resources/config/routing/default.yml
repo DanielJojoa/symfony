@@ -10,3 +10,11 @@ default_login:
     path: /login
     defaults: { _controller: "AppBundle:Default:login" }
     methods: POST 
+default_new:
+    path: /new
+    defaults: { _controller: "AppBundle:User:new" }
+    methods: POST
+default_edit:
+    path: /edit
+    defaults: { _controller: "AppBundle:User:edit" }
+    methods: POST 
