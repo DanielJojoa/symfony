@@ -14,7 +14,7 @@ class UserController extends Controller{
         $params = json_decode($json);
        
         $data = array(
-            'status' =>'error',
+            'status' =>'error1',
             'code' => 400,
             'msg' => 'User not Created ¡¡',
             "json" =>$json
@@ -31,7 +31,7 @@ class UserController extends Controller{
             //cifrar la contraseña
 
             
-
+            
             $emailConstraint = new Assert\Email();
             $emailConstraint->message = "This mail is not valid ¡¡";
             $validate_email = $this->get('validator')->validate($email,$emailConstraint);
@@ -43,6 +43,10 @@ class UserController extends Controller{
                 $user->setEmail($email);
                 $user->setName($name);
                 $user->setSurname($surename);
+                if($password != null){
+                    $pwd = hash('sha256',$password);
+                    $user->setPassword($pwd);
+                }
                 
                 $em = $this->getDoctrine()->getManager();
                 $isset_user = $em->getRepository('BackendBundle:User')->findBy(array("email"=> $email));
